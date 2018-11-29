@@ -1,0 +1,25 @@
+{
+    "name": "oldshiji/siwo",
+    "description": "this is a simple framework base on swoole4.2.7",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "oldshiji",
+            "email": "1655664358@qq.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "Siwo\\":"siwo/src",
+            "App\\":"app/"
+        },
+        "files":[
+            "siwo/src/Foundation/Helper.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "jakub-onderka/php-console-color":"dev-master",
+        "wp-cli/php-cli-tools":"dev-master"
+    }
+}
