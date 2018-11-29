@@ -15,6 +15,7 @@ class HttpController
     public function callAction($method,\swoole_http_request $request,\swoole_http_response $response){
        $this->request = $request;
        $this->response = $response;
+       $this->response->header("content-type","text/html;charset=utf8");
        if (method_exists($this,$method)){
            $this->{$method}();
        }
