@@ -13,7 +13,7 @@ class UserController extends HttpController
 {
     public function test()
     {
-        $this->response->end("hi,users");
+        $this->response->end("<div style='text-align:center;font-size:30px;margin:200px auto;'>Hello,Siwo!^_^<p>基于swoole4.2.x版本撸的简易渣渣框架</p></div>");
 
     }
 
