@@ -62,7 +62,7 @@ class Query
                 throw new \InvalidArgumentException("table not Found!");
             }
             $this->sql = "INSERT INTO ".$this->table."(`".implode("`,`",array_keys($data))."`) VALUES ('".implode("','",array_values($data))."')";
-            return $this->db->query($this->sql);
+            return $this->execute($this->sql);
         }else{
             throw  new \InvalidArgumentException("参数错误");
         }
@@ -480,7 +480,7 @@ class Query
                 $fields.="`{$field}` = '".$value."',";
             }
             $this->sql = "UPDATE ".$this->table." SET ".substr($fields,0,-1)." WHERE ".substr($this->where,0,-4);
-            return $this->db->query($this->sql);
+            return $this->execute($this->sql);
         }else{
             throw  new \InvalidArgumentException("参数错误");
         }
@@ -508,7 +508,7 @@ class Query
             }
         }
 
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function find()
@@ -517,7 +517,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT ".(empty($this->fields)?"*":$this->fields)." FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4))." LIMIT 1";
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function all()
@@ -526,7 +526,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT * FROM ".$this->table;
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function get()
@@ -535,8 +535,8 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT * FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        echo $this->sql;
-        return $this->db->query($this->sql);
+
+        return $this->execute($this->sql);
     }
 
     public function orderby($field,$sort)
@@ -566,10 +566,11 @@ class Query
         if (empty($this->table)){
             throw new \InvalidArgumentException("table not Found!");
         }
-        $total = $this->db->query("SELECT COUNT(*) AS p FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4)));
+        $total = $this->execute("SELECT COUNT(*) AS p FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4)));
         $pages = ceil($total[0]['p']/$rows);
+        $page = ($page-1)*$rows;
         $this->sql = "SELECT ".(empty($this->fields)?"*":$this->fields)." FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4))." LIMIT {$page},{$rows}".(!empty($this->order)?substr($this->order,0,-1):'');
-        $result = $this->db->query($this->sql);
+        return $this->execute($this->sql);
         return ['pages'=>$pages,'rows'=>$result];
     }
 
@@ -579,7 +580,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT ".$column." FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function value($column)
@@ -588,7 +589,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT ".$column." FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4))." LIMIT 1";
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function max($column)
@@ -597,7 +598,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT MAX({$column}) AS `max` FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function min($column)
@@ -606,7 +607,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT MIN({$column}) AS `min` FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function avg($column)
@@ -615,7 +616,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT AVG({$column}) AS `avg` FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function count($column)
@@ -624,7 +625,7 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT COUNT({$column}) AS `count` FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function sum($column)
@@ -633,11 +634,30 @@ class Query
             throw new \InvalidArgumentException("table not Found!");
         }
         $this->sql = "SELECT SUM({$column}) AS `sum` FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4));
-        return $this->db->query($this->sql);
+        return $this->execute($this->sql);
     }
 
     public function toSql()
     {
         return $this->sql;
+    }
+
+    public function execute($sql)
+    {
+        $result = $this->db->query($this->sql);
+
+        if ($this->db->errno == 0){
+            $this->table = '';
+            $this->fields= '';
+            $this->where = '';
+            $this->order = '';
+            $this->group ='';
+            $this->sql   = '';
+            return $result;
+        }else{
+
+            self::$instance = new self();
+            return $this->db->query($this->sql);
+        }
     }
 }

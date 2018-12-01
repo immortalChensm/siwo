@@ -8,6 +8,8 @@
 Route::group(['prefix'=>'api','middleware'=>'web'],function(){
     Route::get("user/test","UserController@test");
     Route::get("user/lists","UserController@testa");
+    Route::post("video/clip","VideoController@clip");
+    Route::post("video/division","VideoController@clipFilter");
 
 
 
