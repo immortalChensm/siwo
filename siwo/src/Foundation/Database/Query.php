@@ -566,7 +566,7 @@ class Query
         if (empty($this->table)){
             throw new \InvalidArgumentException("table not Found!");
         }
-        $total = $this->execute("SELECT COUNT(*) AS p FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4)));
+        $total = $this->query("SELECT COUNT(*) AS p FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4)));
         $pages = ceil($total[0]['p']/$rows);
         $page = ($page-1)*$rows;
         $this->sql = "SELECT ".(empty($this->fields)?"*":$this->fields)." FROM ".$this->table.(empty($this->where)?'':" WHERE ".substr($this->where,0,-4))." LIMIT {$page},{$rows}".(!empty($this->order)?substr($this->order,0,-1):'');
