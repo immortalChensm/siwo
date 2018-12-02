@@ -5,11 +5,11 @@ Siwo
 框架实现了
 ----
 1. http,tcp,udp,websocket的封装，只需要定义好路由编写对应的控制器即可使用
-2. 简易封装了mysql协程客户端
+2. 简易封装了mysql协程客户端，简单实现了类似tp的DB用法
 
 框架安装
 ----
-1. git clone url
+1. git clone https://github.com/oldshiji/siwo
 2. composer install
 
 框架启动
@@ -17,6 +17,7 @@ Siwo
 
 1. 启动
 php siwod start
+![logo](https://github.com/HeTingwei/ReadmeLearn/blob/master/avatar1.jpg)
 2. 停止
 php siwod stop
 3. 重启

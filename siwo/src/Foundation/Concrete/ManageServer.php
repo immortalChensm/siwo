@@ -8,6 +8,7 @@
 namespace Siwo\Foundation\Concrete;
 
 use Siwo\Foundation\Application;
+use Swoole\Coroutine;
 
 class ManageServer
 {
@@ -20,21 +21,36 @@ class ManageServer
     {
         switch ($cmd){
             case 'start':
+
                 $this->createServer();
                 break;
             case 'stop':
                 if (file_exists($this->app['config']['pid_file'])){
-                    \swoole_process::kill(file_get_contents($this->app['config']['pid_file']),SIGTERM);
+                    $this->handleProcess();
                 }
                 break;
             case 'restart':
                 if (file_exists($this->app['config']['pid_file'])){
-                    \swoole_process::kill(file_get_contents($this->app['config']['pid_file']),SIGTERM);
+                    $this->handleProcess();
                 }
                 $this->createServer();
                 break;
         }
 
+    }
+
+    function handleProcess()
+    {
+        Coroutine::create(function(){
+            $shell = " ps -ef |grep siwod |grep -v grep |awk '{print $2'}";
+            $process_exist = \swoole_coroutine::exec($shell);
+            $process_list = explode("\n",$process_exist['output']);
+
+            $pid_file_content = file_get_contents($this->app['config']['pid_file']);
+            if (in_array($pid_file_content,$process_list)){
+                \swoole_process::kill(file_get_contents($this->app['config']['pid_file']),SIGTERM);
+            }
+        });
     }
 
     function createServer()
