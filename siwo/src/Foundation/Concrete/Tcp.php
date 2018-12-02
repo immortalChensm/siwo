@@ -20,6 +20,7 @@ class Tcp extends \swoole_server
             'worker_num'=>self::$app['config']['worker_num'],
             'reactor_num'=>self::$app['config']['reactor_num'],
             'task_worker_num'=>self::$app['config']['task_worker_num'],
+            'daemonize'=>app('config')['daemonize']
         ]);
 
         if (config("task_worker_num")!=0){

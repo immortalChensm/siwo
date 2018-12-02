@@ -19,6 +19,7 @@ class Websocket extends \swoole_websocket_server
             'pid_file'=>self::$app['config']['pid_file'],
             'worker_num'=>self::$app['config']['worker_num'],
             'reactor_num'=>self::$app['config']['reactor_num'],
+            'daemonize'=>app('config')['daemonize']
         ]);
         $this->on("open",[$this,'OnOpen']);
         $this->on("close",[$this,'OnClose']);

@@ -19,7 +19,8 @@ class Http extends \swoole_http_server
             'pid_file'=>self::$app['config']['pid_file'],
             'worker_num'=>self::$app['config']['worker_num'],
             'reactor_num'=>self::$app['config']['reactor_num'],
-            'package_max_length'=>100*1024*1024
+            'package_max_length'=>100*1024*1024,
+            'daemonize'=>app('config')['daemonize']
         ]);
         $this->on("request",[$this,'OnRequest']);
         $this->on("start",[$this,'OnStart']);

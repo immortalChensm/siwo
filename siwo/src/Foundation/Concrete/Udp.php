@@ -19,6 +19,7 @@ class Udp extends \swoole_server
             'pid_file'=>self::$app['config']['pid_file'],
             'worker_num'=>self::$app['config']['worker_num'],
             'reactor_num'=>self::$app['config']['reactor_num'],
+            'daemonize'=>app('config')['daemonize']
         ]);
         $this->on("Start",[$this,'OnStart']);
         $this->on("Packet",[$this,'OnPacket']);
