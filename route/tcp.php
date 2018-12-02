@@ -11,4 +11,5 @@ return [
     'user/tables'=>'App\Tcp\ClientController@showTables',
     'user/users'=>'App\Tcp\ClientController@addUsers',
     'user/get'=>'App\Tcp\ClientController@getUser',
+    'test'=>'App\Tcp\Controllers\TestController@index',
 ];

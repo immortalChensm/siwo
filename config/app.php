@@ -12,7 +12,7 @@ return [
     'document_root' => '/data/webroot/example.com',
     'enable_static_handler' => true,
     'task_num'=>0,
-    'server_type'=>SWOOLE_SOCK_UDP,//SWOOLE_SOCK_TCP
+    'server_type'=>SWOOLE_SOCK_TCP,//SWOOLE_SOCK_TCP
     'server_mode'=>SWOOLE_PROCESS,
     'port'=>2346,
     'host'=>'0.0.0.0',
@@ -24,7 +24,7 @@ return [
     'max_request'=>10,
     'daemonize'=>0,
     'log_file'=>'./log/siwo.log',
-    'type'=>'http',//http,tcp,udp
+    'type'=>'tcp',//http,tcp,udp
     'db'=>[
         'host'=>'127.0.0.1',
         'port'=>3306,
