@@ -17,7 +17,7 @@ Siwo
 
 1. 启动
 php siwod start
-![logo](https://github.com/HeTingwei/ReadmeLearn/blob/master/avatar1.jpg)
+![logo](https://github.com/oldshiji/siwo/blob/master/tmp/siwo.png)
 2. 停止
 php siwod stop
 3. 重启
