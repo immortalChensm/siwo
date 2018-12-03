@@ -68,7 +68,9 @@ class Router
             if(is_object($route)){
                 $route->dispatchToController($request,$response);
             }else{
-                $this->error($response,$request->server['request_uri']."该路由未定义");
+                //$this->error($response,$request->server['request_uri']."该路由未定义");
+                $response->header("content-type","text/html;charset=utf8");
+                $response->end("<html><body><div style='text-align: center;margin:200px auto;'>欢迎使用Siwo--来自渣渣jackCsm^_^</div></body></html>");
             }
 
     }

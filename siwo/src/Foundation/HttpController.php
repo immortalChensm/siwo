@@ -18,6 +18,8 @@ class HttpController
        $this->response->header("content-type","text/html;charset=utf8");
        if (method_exists($this,$method)){
            $this->{$method}();
+       }else{
+           $this->{'index'};
        }
     }
 
