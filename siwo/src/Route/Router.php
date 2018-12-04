@@ -33,6 +33,16 @@ class Router
         $this->addRoute('POST',$uri,$action);
     }
 
+    public function put($uri,$action)
+    {
+        $this->addRoute('PUT',$uri,$action);
+    }
+
+    public function delete($uri,$action)
+    {
+        $this->addRoute('DELETE',$uri,$action);
+    }
+
     public function addRoute($method,$uri,$action)
     {
         $this->routePool->addRoute(new Route([

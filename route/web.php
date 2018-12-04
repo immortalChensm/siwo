@@ -12,6 +12,9 @@ Route::group(['prefix'=>'api','middleware'=>'web'],function(){
     Route::post("video/division","VideoController@clipFilter");
 
 
+    Route::get("chan/test","ChanController@test");
+
+
 
 });
 

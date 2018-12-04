@@ -23,8 +23,145 @@ php siwod stop
 3. 重启
 php siwod restart
 
-注意事项
-----
-框架为本人闲职状态中独立编写的框架，封装思想来源于laravel，个人能力渣，各位同行请勿喷水
-有意可互相学习
+### HTTP Controller
+```php
 
+/**
+ * Created by PhpStorm.
+ * User: 1655664358@qq.com
+ * Date: 2018/11/19
+ * Time: 13:36
+ */
+Route::group(['prefix'=>'api','middleware'=>'web'],function(){
+    Route::get("user/test","UserController@test");
+    Route::get("user/lists","UserController@testa");
+    Route::post("video/clip","VideoController@clip");
+    Route::post("video/division","VideoController@clipFilter");
+
+
+    Route::get("chan/test","ChanController@test");
+
+
+
+});
+
+Route::group(['middleware'=>'api'],function(){
+    Route::get("user/test/a","UserController@test");
+    Route::get("user/lists/a","UserController@lists");
+});
+/**
+ * Created by PhpStorm.
+ * User: 1655664358@qq.com
+ * Date: 2018/11/21
+ * Time: 13:28
+ */
+namespace App\Http\Controllers;
+
+use Siwo\Foundation\Database\Db;
+use Siwo\Foundation\HttpController;
+use Swoole\Coroutine;
+use Swoole\Process;
+
+class VideoController extends HttpController
+{
+
+    public function clip()
+    {
+
+        Coroutine::create(function (){
+            $from_second = $this->request->post['from_second'];//00:00:20
+            $to_second   = $this->request->post['to_second'];
+            if (empty($from_second))$this->response->write("视频起始时间参数未传递");
+            if (empty($to_second))$this->response->write("视频结束时间参数未传递");
+
+            $video = "/home/video/video.mp4";
+
+            $video_name = date("Ymdhis").".mp4";
+            $video_dest = "/home/video/".$video_name;
+            $video_output= "https://www.itkucode.com/".$video_name;
+
+            $cmd = "/usr/local/bin/ffmpeg -i ".$video." -vcodec copy -acodec copy -ss ".$from_second." -to ".$to_second." ".$video_dest." -y";
+            $ret = Coroutine::exec($cmd);
+
+            if (isset($ret['code']) && $ret['code'] == 0){
+                $this->response->end($video_output);
+            }
+
+
+        });
+
+
+    }
+```
+
+### Tcp Controller
+```php
+/**
+ * Created by PhpStorm.
+ * User: 1655664358@qq.com
+ * Date: 2018/11/21
+ * Time: 20:37
+ */
+namespace App\Tcp\Controllers;
+use Siwo\Foundation\Database\Db;
+use Siwo\Foundation\TcpController;
+use Swoole\Coroutine;
+
+class TestController extends TcpController
+{
+    public function index()
+    {
+        $this->server->send($this->fd,'hello,siwo');
+    }
+
+
+}
+```
+
+### Udp Controller
+```php
+/**
+ * Created by PhpStorm.
+ * User: 1655664358@qq.com
+ * Date: 2018/11/24
+ * Time: 18:09
+ */
+namespace App\Udp\Controllers;
+
+use Siwo\Foundation\UdpController;
+
+class UserController extends UdpController
+{
+    public function index()
+    {
+        $this->server->sendto($this->clientInfo['address'],$this->clientInfo['port'],json_encode($this->getClientInfo()));
+    }
+
+
+}
+```
+
+### websocket Controller
+```php
+/**
+ * Created by PhpStorm.
+ * User: 1655664358@qq.com
+ * Date: 2018/11/28
+ * Time: 15:11
+ */
+namespace App\Ws\Controllers;
+
+use Siwo\Foundation\WebsocketController;
+
+class UserController extends WebsocketController
+{
+    public function index()
+    {
+        echo $this->frame->data;
+        $this->getServer()->push($this->fd,"hello,swoole");
+    }
+}
+框架封装思想
+----
+框架封装思想来源于对Laravel的理解，实现从定义路由到控制器调度的实现封装，由于时间仓促部分功能并未完善
+感谢各位同行的支持！给个star鼓励！^_^

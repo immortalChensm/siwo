@@ -1,6 +1,7 @@
 {
     "name": "oldshiji/siwo",
     "description": "this is a simple framework base on swoole4.2.7",
+    "keywords" : ["swoole", "framework", "async","siwo"],
     "license": "MIT",
     "authors": [
         {
@@ -19,6 +20,8 @@
     },
     "minimum-stability": "dev",
     "require": {
+        "php": ">=7.1.0",
+        "ext-swoole": ">=4.2.6",
         "jakub-onderka/php-console-color":"dev-master",
         "wp-cli/php-cli-tools":"dev-master"
     }
