@@ -9,8 +9,8 @@ Siwo
 
 框架安装
 ----
-1. git clone https://github.com/oldshiji/siwo
-2. composer install
+1.composer create-project oldshiji/siwo siwo
+目前沿无稳定版本，安装时请指定版本即可
 
 框架启动
 ----
