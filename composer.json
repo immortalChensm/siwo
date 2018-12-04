@@ -19,6 +19,7 @@
         ]
     },
     "minimum-stability": "dev",
+     "type": "project",
     "require": {
         "php": ">=7.1.0",
         "ext-swoole": ">=4.2.6",
