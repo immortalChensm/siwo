@@ -27,7 +27,7 @@ LOG;
             foreach ($consoleColor->getPossibleStyles() as $style) {
                 if ($style == 'light_green'){
                     echo $consoleColor->apply($style, $logo) . "\n";
-                    echo $consoleColor->apply('bg_dark_gray', $consoleColor->apply('yellow', ' Siwo is a very simple framework '.$consoleColor->apply('white', '0.0.1').'        ')) . "\n";
+                    echo $consoleColor->apply('bg_dark_gray', $consoleColor->apply('yellow', ' Siwo is a very simple framework '.$consoleColor->apply('white', self::$app::VERSION).'        ')) . "\n";
                     echo $consoleColor->apply('bg_dark_gray', $consoleColor->apply('yellow', ' php                             '.$consoleColor->apply('white', phpversion()).'        ')) . "\n";
                     echo $consoleColor->apply('bg_dark_gray', $consoleColor->apply('yellow', ' swoole                          '.$consoleColor->apply('white', swoole_version()).'        ')) . "\n";
                     echo $consoleColor->apply('bg_dark_gray', $consoleColor->apply('yellow', ' run at user                     '.$consoleColor->apply('white', get_current_user()).'         ')) . "\n";

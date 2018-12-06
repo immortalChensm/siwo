@@ -18,7 +18,7 @@ class Application implements \ArrayAccess,\IteratorAggregate
     public static $instance;
 
     protected $base_path;
-    const VERSION = 0.1;
+    const VERSION = 'v0.2-alpha';
 
     protected $providers = [];
     protected $instances = [];
