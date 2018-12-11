@@ -12,6 +12,9 @@ Siwo
 1.composer create-project oldshiji/siwo siwo
 目前沿无稳定版本，安装时请指定版本即可
 
+框架和单片机通信实验
+----
+![logo](https://github.com/oldshiji/siwo/blob/master/tmp/mcu.png)
 框架启动
 ----
 

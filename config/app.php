@@ -24,7 +24,7 @@ return [
     'max_request'=>10,
     'daemonize'=>0,
     'log_file'=>'./log/siwo.log',
-    'type'=>'http',//http,tcp,udp
+    'type'=>'tcp',//http,tcp,udp
     'db'=>[
         'host'=>'127.0.0.1',
         'port'=>3306,
