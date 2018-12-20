@@ -13,6 +13,7 @@ Route::group(['prefix'=>'api','middleware'=>'web'],function(){
 
 
     Route::get("chan/test","ChanController@test");
+    Route::get("mycat/test","MycatController@client");
 
 
 

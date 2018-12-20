@@ -35,7 +35,10 @@ class Tcp extends \swoole_server
 
     public function OnTask(\swoole_server $server,$task_id,$src_worker_id,$data)
     {
-        
+        if ($data instanceof \Closure){
+            $data();
+            $server->finish($data);
+        }
     }
 
     public function OnFinish(\swoole_server $server,$task_id,$data)

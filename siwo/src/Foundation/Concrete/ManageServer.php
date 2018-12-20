@@ -65,6 +65,9 @@ class ManageServer
         }elseif($this->app['config']['type'] == 'ws'){
 
             (new Websocket($this->app['config']['host'],$this->app['config']['port']))->run($this->app)->start();
+        }elseif($this->app['config']['type'] == 'socket'){
+
+            (new Socket())->run($this->app);
         }
     }
 }

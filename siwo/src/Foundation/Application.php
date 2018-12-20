@@ -36,6 +36,7 @@ class Application implements \ArrayAccess,\IteratorAggregate
         $this->registerTcpRoute();
         $this->registerUdpRoute();
         $this->registerWsRoute();
+        $this->registerSocketRoute();
         $this->loadConfig();
     }
 
@@ -51,6 +52,10 @@ class Application implements \ArrayAccess,\IteratorAggregate
     public function registerUdpRoute()
     {
         $this->instances['udp_routes'] = new Repository(require_once $this->getRoutePath()."/udp.php");
+    }
+    public function registerSocketRoute()
+    {
+        $this->instances['socket_routes'] = new Repository(require_once $this->getRoutePath()."/socket.php");
     }
     public function run()
     {

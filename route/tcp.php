@@ -12,4 +12,8 @@ return [
     'user/users'=>'App\Tcp\ClientController@addUsers',
     'user/get'=>'App\Tcp\ClientController@getUser',
     'test'=>'App\Tcp\Controllers\TestController@index',
+    'redis'=>'App\Tcp\Controllers\TestController@redis',
+
+
+    'mycat'=>'App\Tcp\Controllers\MycatController@client',
 ];

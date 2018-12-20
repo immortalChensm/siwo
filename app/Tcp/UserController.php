@@ -13,11 +13,13 @@ class UserController extends TcpController
 {
     public function index(\swoole_server $server,$fd,$reactorId,$data)
     {
-        $server->send($fd,"receive your data it is:".$data.",recive time is:".date('Y-m-d H:i:s'));
+        $server->send($fd,$data);
     }
 
     public function task()
     {
+        $this->server->task(function (){
 
+        });
     }
 }
