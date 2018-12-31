@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7085e9cc77e2f29bdab20a97dd23a73",
+    "content-hash": "fc9293206e457b80270e467cc64d8d68",
     "packages": [
         {
             "name": "jakub-onderka/php-console-color",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JakubOnderka/PHP-Console-Color.git",
-                "reference": "d5deaecff52a0d61ccb613bb3804088da0307191"
+                "reference": "f725c01cfd5c29005919850c1502066149dc1117"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Color/zipball/d5deaecff52a0d61ccb613bb3804088da0307191",
-                "reference": "d5deaecff52a0d61ccb613bb3804088da0307191",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Color/zipball/f725c01cfd5c29005919850c1502066149dc1117",
+                "reference": "f725c01cfd5c29005919850c1502066149dc1117",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,49 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
-            "time": "2018-09-29T17:23:10+00:00"
+            "time": "2018-12-16T21:44:34+00:00"
+        },
+        {
+            "name": "oldshiji/siwo-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oldshiji/siwo-framework.git",
+                "reference": "57cc01fbcdd222ef6410a4b5da38fa29c0eaa932"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oldshiji/siwo-framework/zipball/57cc01fbcdd222ef6410a4b5da38fa29c0eaa932",
+                "reference": "57cc01fbcdd222ef6410a4b5da38fa29c0eaa932",
+                "shasum": ""
+            },
+            "require": {
+                "ext-swoole": ">=4.2.6",
+                "jakub-onderka/php-console-color": "dev-master",
+                "php": ">=7.1.0",
+                "wp-cli/php-cli-tools": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siwo\\": "src/"
+                },
+                "files": [
+                    "src/Foundation/Helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "oldshiji",
+                    "email": "1655664358@qq.com"
+                }
+            ],
+            "description": "this is siwo-kernel library of siwo base on swoole 4.2.x",
+            "time": "2018-12-31T05:45:23+00:00"
         },
         {
             "name": "wp-cli/php-cli-tools",
@@ -103,8 +145,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jakub-onderka/php-console-color": 20,
-        "wp-cli/php-cli-tools": 20
+        "oldshiji/siwo-framework": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -6,4 +6,4 @@
  * Time: 0:38
  */
 #/usr/bin/php
-require 'siwo/start.php';
+require './vendor/oldshiji/siwo-framework/bin/start.php';

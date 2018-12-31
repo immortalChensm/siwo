@@ -11,19 +11,17 @@
     ],
     "autoload":{
         "psr-4":{
-            "Siwo\\":"siwo/src",
             "App\\":"app/"
-        },
-        "files":[
-            "siwo/src/Foundation/Helper.php"
-        ]
+        }
     },
-    "minimum-stability": "dev",
      "type": "project",
     "require": {
-        "php": ">=7.1.0",
-        "ext-swoole": ">=4.2.6",
-        "jakub-onderka/php-console-color":"dev-master",
-        "wp-cli/php-cli-tools":"dev-master"
-    }
+        "oldshiji/siwo-framework":"dev-master"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability":"dev"
 }
