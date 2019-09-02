@@ -164,7 +164,5 @@ class UserController extends WebsocketController
         $this->getServer()->push($this->fd,"hello,swoole");
     }
 }
-框架封装思想
-----
-框架封装思想来源于对Laravel的理解，实现从定义路由到控制器调度的实现封装，由于时间仓促部分功能并未完善
-感谢各位同行的支持！给个star鼓励！^_^
+
+PS:不在维护和管理了
